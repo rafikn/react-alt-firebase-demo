@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
@@ -15,21 +16,9 @@ import ToolbarSeparator from 'material-ui/Toolbar';
 import ToolbarTitle from 'material-ui/Toolbar';
 import AutoComplete from 'material-ui/AutoComplete';
 import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
 
-import { Link } from 'react-router';
-
-
-const iconStyles = {
-  margin: '16 5 15 5'
-};
-const searchStyles = {
-  margin: 4
-};
-const buttonStyles = {
-  padding: '10 0 0 0',
-  width: 250,
-  textTransform: 'none'
-};
+import {Row, Col} from 'react-flexbox-grid/lib';
 
 import AuthStore from '../../stores/AuthStore';
 import AuthActions from '../../actions/AuthAction';
@@ -44,7 +33,6 @@ export default class Header extends React.Component {
       dataSource: [],
       user: null
     }
-
   }
 
   static getStores() {
@@ -65,60 +53,78 @@ export default class Header extends React.Component {
 
 
   render() {
+
+    const iconStyles = {
+      marginTop: 13
+    };
+    const searchStyles = {
+      minWidth: 100
+    };
+    const linkStyles = {
+      margin: 10
+    };
+    const buttonStyles = {
+      marginTop: 10,
+      minWidth: 120
+    };
+
+
     return (
+      <Row>
+        <Col xs>
+          <Paper zDepth={1}>
+          <Toolbar style={{width: '100%'}}>
+                <ToolbarGroup float="left">
+                  <FlatButton children={
+                      <img src="/public/img/logo-white.png" style={{ width: 115}} />
+                  }/>
+                </ToolbarGroup>
+                <ToolbarGroup>
+                  <FontIcon className="material-icons" style={iconStyles}>search</FontIcon>
+                  <AutoComplete
+                     hintText="Browse Items"
+                     dataSource={this.state.dataSource}
+                     onUpdateInput={this.handleUpdateInput}
+                     fullWidth={true}
+                     underlineShow={false}
+                     style={searchStyles}
+                   />
+                </ToolbarGroup>
+                <ToolbarGroup>
+                    <FlatButton
+                      containerElement={<Link to="/faq" />}
+                      label="FAQ"
+                      primary={true}
+                      fullWidth={true}
 
-        <Toolbar>
-          <ToolbarGroup float="left">
-            <FlatButton children={
-              <img src="/public/img/logo-white.png" style={{ width: 115}} />
-              }/>
-          </ToolbarGroup>
+                      style={linkStyles}
+                    />
 
-          <ToolbarGroup float="right">
-            <FontIcon className="material-icons" style={iconStyles}>search</FontIcon>
+                    <FlatButton
+                      containerElement={<Link to="/login" />}
+                      label="Sign In"
+                      primary={true}
+                      style={linkStyles}
+                    />
 
-            <AutoComplete
-               hintText="Browse Items"
-               dataSource={this.state.dataSource}
-               onUpdateInput={this.handleUpdateInput}
-               fullWidth={true}
-               underlineShow={false}
-               style={searchStyles}
-             />
+                    <FlatButton
+                      containerElement={<Link to="/signup" />}
+                      label="Sign Up"
+                      primary={true}
+                      style={linkStyles}
+                    />
 
-            <ToolbarSeparator />
-              <FlatButton
-                containerElement={<Link to="/new/item" />}
-                label="List an Item"
-                primary={true}
-                fullWidth={true}
+                  <RaisedButton
+                    label="List an Item"
+                    primary={true} style={buttonStyles}
+                    containerElement={<Link to="/new/item"/>}
+                  />
+                </ToolbarGroup>
 
-                style={buttonStyles}
-              />
-
-              <FlatButton
-                containerElement={<Link to="/faq" />}
-                label="FAQ"
-                primary={true}
-                style={buttonStyles}
-              />
-
-              <FlatButton
-                containerElement={<Link to="/login" />}
-                label="Sign In"
-                primary={true}
-                style={buttonStyles}
-              />
-
-            <RaisedButton
-              label="Sign Up"
-              primary={true} style={{
-                margin: '10 10 10 30',
-              }}
-              containerElement={<Link to="/signup" />}
-            />
-          </ToolbarGroup>
-        </Toolbar>
+          </Toolbar>
+        </Paper>
+        </Col>
+      </Row>
     );
   }
 };

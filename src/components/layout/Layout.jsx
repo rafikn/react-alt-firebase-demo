@@ -3,24 +3,12 @@ import auth from '../utils/auth.js'
 
 import Link from 'react-router';
 import Header from './Header.jsx';
+import Paper from 'material-ui/Paper';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import WhyBuyTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
-function redirectToLogin(nextState, replace) {
-  if (!auth.loggedIn()) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
-    })
-  }
-}
-
-function redirectToDashboard(nextState, replace) {
-  if (auth.loggedIn()) {
-    replace('/')
-  }
-}
+import {Grid, Row, Col} from 'react-flexbox-grid/lib';
 
 export default class Layout extends React.Component {
 
@@ -43,12 +31,16 @@ export default class Layout extends React.Component {
   }
 
   render() {
+    const style = {
+      width: 800
+    };
+
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(WhyBuyTheme)}>
-        <div>
+        <Grid fluid>
           <Header />
           {this.props.children}
-        </div>
+        </Grid>
       </MuiThemeProvider>
     );
   }

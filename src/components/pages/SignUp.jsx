@@ -26,7 +26,7 @@ const inputStyle = {
 
 export default class SignUp extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
 

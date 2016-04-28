@@ -17,14 +17,7 @@ export default class NewItem extends React.Component {
   render() {
     return (
       <Paper style={style} zDepth={1}>
-        <TextField hintText="First name" style={inputStyle} underlineShow={false} />
-        <Divider />
-        <TextField hintText="Middle name" style={inputStyle} underlineShow={false} />
-        <Divider />
-        <TextField hintText="Last name" style={inputStyle} underlineShow={false} />
-        <Divider />
-        <TextField hintText="Email address" style={inputStyle} underlineShow={false} />
-        <Divider />
+          hello
       </Paper>
     );
   }
